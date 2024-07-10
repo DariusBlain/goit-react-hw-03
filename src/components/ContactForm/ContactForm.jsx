@@ -3,13 +3,21 @@ import * as Yup from "yup";
 import { nanoid } from "nanoid";
 import s from "./ContactForm.module.css";
 
+const initialValues = {
+  name: "",
+  number: "",
+};
+
 const ValidationSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
   number: Yup.string()
-    .matches(/^[0-9]+$/)
+    .matches(
+      /^[0-9-]+$/,
+      "Invalid input: only numbers and hyphens are allowed."
+    )
     .min(3, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
@@ -30,10 +38,7 @@ const ContactForm = ({ onAdd }) => {
 
   return (
     <Formik
-      initialValues={{
-        name: "",
-        number: "",
-      }}
+      initialValues={initialValues}
       onSubmit={handleSubmit}
       validationSchema={ValidationSchema}
     >
@@ -46,7 +51,7 @@ const ContactForm = ({ onAdd }) => {
 
         <label className={s.label} htmlFor={numberFieldId}>
           Number
-          <Field type="number" name="number" id={numberFieldId} />
+          <Field type="tel" name="number" id={numberFieldId} />
           <ErrorMessage className={s.error} name="number" component="span" />
         </label>
 
