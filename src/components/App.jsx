@@ -8,10 +8,11 @@ import SearchBox from "./SearchBox/SearchBox";
 
 function App() {
   const [contacts, setContacts] = useState(() => {
-    const savedContacts = window.localStorage.getItem("Contacts");
-    if (savedContacts.length !== 0) {
-      return JSON.parse(savedContacts);
-    } else {
+    try {
+      const savedContacts = window.localStorage.getItem("Contacts");
+      return savedContacts ? JSON.parse(savedContacts) : initialContacts;
+    } catch (error) {
+      console.error("Error parsing contacts from localStorage", error);
       return initialContacts;
     }
   });
@@ -19,10 +20,14 @@ function App() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    if (contacts.length !== 0) {
-      return window.localStorage.setItem("Contacts", JSON.stringify(contacts));
-    } else {
-      window.localStorage.setItem("Contacts", []);
+    try {
+      if (contacts.length === 0) {
+        window.localStorage.removeItem("Contacts");
+      } else {
+        window.localStorage.setItem("Contacts", JSON.stringify(contacts));
+      }
+    } catch (error) {
+      console.error("Error saving contacts to localStorage", error);
     }
   }, [contacts]);
 
