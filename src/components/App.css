@@ -1,8 +1,34 @@
+#root {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
 .container {
-  max-width: 1280px;
+  padding: 60px;
+  width: 1280px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  align-items: start;
   gap: 24px;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(201, 200, 255);
+  height: 30px;
+  box-shadow: 1px 1px 2px 2px #868686;
+  cursor: pointer;
+  transition: transform cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+button:hover,
+button:focus {
+  background-color: rgb(184, 183, 248);
+  transform: scale(1.03);
 }

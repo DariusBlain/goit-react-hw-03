@@ -9,9 +9,7 @@ import SearchBox from "./SearchBox/SearchBox";
 function App() {
   const [contacts, setContacts] = useState(() => {
     const savedContacts = window.localStorage.getItem("Contacts");
-    console.log(savedContacts);
     if (savedContacts.length !== 0) {
-      console.log("null");
       return JSON.parse(savedContacts);
     } else {
       return initialContacts;

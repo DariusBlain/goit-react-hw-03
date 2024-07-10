@@ -1,6 +1,9 @@
 .list {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  max-width: 340px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.listItem {
+  min-width: 278px;
 }
